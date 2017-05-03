@@ -13,10 +13,10 @@ import kstructs.Deque
  * @author Michael van Dyk
  */
 interface List<E> : Deque<E> {
-    operator fun get(index: Int): E?
-    operator fun set(index: Int, item: E): E?
-    fun add(index: Int, item: E): Boolean
-    fun remove(index: Int): E?
+    operator fun get(index: Int): E
+    operator fun set(index: Int, item: E): E
+    fun add(index: Int, item: E)
+    fun remove(index: Int): E
 
     override fun addFirst(item: E) = add(0, item)
     override fun removeFirst() = remove(0)

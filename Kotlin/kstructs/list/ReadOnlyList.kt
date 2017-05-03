@@ -13,17 +13,17 @@ package kstructs.list
 class ReadOnlyList<E>(private val list: List<E>): List<E> {
     override fun size(): Int = list.size()
 
-    override fun get(index: Int): E? = list[index]
+    override fun get(index: Int): E = list[index]
 
-    override fun set(index: Int, item: E): E? {
+    override fun set(index: Int, item: E): E {
         throw UnsupportedOperationException()
     }
 
-    override fun add(index: Int, item: E): Boolean {
+    override fun add(index: Int, item: E) {
         throw UnsupportedOperationException()
     }
 
-    override fun remove(index: Int): E? {
+    override fun remove(index: Int): E {
         throw UnsupportedOperationException()
     }
 }

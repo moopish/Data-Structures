@@ -18,19 +18,19 @@ public class ArrayQueue<E> : Queue<E> {
 
     override fun size() = size
 
-    override fun add(item: E): Boolean {
+    override fun add(item: E) {
         if (size + 1 > array.size) resize()
         array[(pos + size++) % array.size] = item
-        return (true)
     }
     //override fun iterator(): Iterator<E> = ArrayQueueIterator(this)
-    override fun remove(): E? =
+    override fun remove(): E =
         if (size != 0) {
-            val ret = array[pos]
+            val ret = array[pos] as E
             pos = (pos + 1) % array.size
-            if (array.size >= 3 * --size) resize()
+            if (4 * --size - 1 < array.size) resize()
             ret
-        } else null
+        } else
+            throw IndexOutOfBoundsException()
 
     private fun resize() {
         val new_arr: Array<E?> = arrayOfNulls<Any?>(Math.max(1, size * 2)) as Array<E?>

@@ -11,6 +11,6 @@ package kstructs
  * @author Michael van Dyk
  */
 interface Queue<E> : Collection<E> {
-    fun add(item: E): Boolean
-    fun remove(): E?
+    fun add(item: E)
+    fun remove(): E
 }

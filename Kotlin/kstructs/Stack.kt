@@ -11,6 +11,6 @@ package kstructs
  * @author Michael van Dyk
  */
 interface Stack<E> : Collection<E> {
-    fun push(item: E): Boolean
-    fun pop(): E?
+    fun push(item: E)
+    fun pop(): E
 }
