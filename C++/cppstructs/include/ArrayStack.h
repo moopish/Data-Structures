@@ -3,7 +3,7 @@
 
 /**
     May 3, 2017
-    TODO doesn't work
+    *FIXED* mixed up dest and src in memmove
 */
 
 #include <cstring>
@@ -48,7 +48,7 @@ template < typename T >
 void ArrayStack<T>::add(uint32_t index, T item)
 {
     if (_size + 1 > _arr_size) resize();
-    std::memmove(arr + index, arr + index + 1, (_size - index) * sizeof(T));
+    std::memmove(arr + index + 1, arr + index, (_size - index) * sizeof(T));
     arr[index] = item;
     ++_size;
 }
@@ -63,7 +63,7 @@ template < typename T >
 T ArrayStack<T>::remove(uint32_t index)
 {
     T ret = arr[index];
-    std::memmove(arr + index + 1, arr + index, (_size - index) * sizeof(T));
+    std::memmove(arr + index, arr + index + 1, (_size - index) * sizeof(T));
     if (_arr_size >= 3 * --_size) resize();
     return (ret);
 }
