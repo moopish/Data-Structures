@@ -12,7 +12,7 @@ package kstructs
  */
 public class ArrayQueue<E> : Queue<E> {
 
-    private var array: Array<E?> = arrayOfNulls<Any?>(0) as Array<E?>
+    private var array: Array<Any?> = arrayOfNulls<Any?>(16)
     private var size: Int = 0
     private var pos: Int = 0
 
@@ -20,22 +20,27 @@ public class ArrayQueue<E> : Queue<E> {
 
     override fun add(item: E) {
         if (size + 1 > array.size) resize()
-        array[(pos + size++) % array.size] = item
+        array[(pos + size++) and (array.size - 1)] = item
     }
-    //override fun iterator(): Iterator<E> = ArrayQueueIterator(this)
+
     override fun remove(): E =
         if (size != 0) {
             val ret = array[pos] as E
-            pos = (pos + 1) % array.size
+            pos = (pos + 1) and (array.size - 1)
             if (4 * --size - 1 < array.size) resize()
             ret
         } else
             throw IndexOutOfBoundsException()
 
     private fun resize() {
-        val new_arr: Array<E?> = arrayOfNulls<Any?>(Math.max(1, size * 2)) as Array<E?>
-        for (k in 0..(size-1))
-            new_arr[k] = array[(pos + k) % array.size]
+        val new_arr: Array<Any?> = arrayOfNulls<Any?>(Math.max(16, size * 2))
+        if (pos + size in pos..array.size) {
+            System.arraycopy(array, pos, new_arr, 0, size)
+        } else {
+            val temp = array.size - pos
+            System.arraycopy(array, pos, new_arr, 0, temp)
+            System.arraycopy(array, 0, new_arr, temp, size - temp)
+        }
         array = new_arr
         pos = 0
     }
