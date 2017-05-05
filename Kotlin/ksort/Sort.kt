@@ -15,7 +15,7 @@ import java.util.*
  */
 
 @Suppress("NOTHING_TO_INLINE")
-private inline fun <T> swap(arr: Array<T>, i: Int, j: Int) {
+inline fun <T> swap(arr: Array<T>, i: Int, j: Int) {
     val t = arr[i]
     arr[i] = arr[j]
     arr[j] = t
