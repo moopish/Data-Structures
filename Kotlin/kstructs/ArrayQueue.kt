@@ -1,5 +1,7 @@
 package kstructs
 
+import java.util.*
+
 /**
  * <p>
  * === ArrayQueue ===
@@ -26,17 +28,18 @@ class ArrayQueue<E> : Queue<E> {
     }
 
     override fun remove(): E =
-        if (size != 0) {
+        if (size == 0) throw NoSuchElementException()
+        else {
             val ret = get()
             pos = (pos + 1) and (array.size - 1)
             if (4 * --size - 1 < array.size) resize()
             ret
-        } else
-            throw IndexOutOfBoundsException()
+        }
+
 
     private fun resize() {
         val new_arr: Array<Any?> = arrayOfNulls<Any?>(Math.max(16, size * 2))
-        if (pos + size in pos..array.size) {
+        if (pos + size in pos..array.size) { // TODO < array.size
             System.arraycopy(array, pos, new_arr, 0, size)
         } else {
             val temp = array.size - pos

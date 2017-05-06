@@ -12,7 +12,11 @@ package kstructs
  * </p>
  * @author Michael van Dyk
  */
-open class ArrayView<E>(val arr: Array<E?>, low: Int, high: Int): CollectionView<E>(low, high) {
+open class ArrayView<E>(
+     val arr: Array<E?>,
+     low: Int,
+     high: Int
+) : CollectionView<E>(low, high) {
     init {
         if (low >= high || low !in 0..arr.size || high !in 0..arr.size)
             throw RuntimeException()
