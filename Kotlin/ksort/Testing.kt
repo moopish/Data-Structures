@@ -15,7 +15,7 @@ import java.util.*
 
 private interface SortingFunctionTest {
     operator fun invoke(array: Array<Int>, c: (a: Int, b: Int) -> Int)
-    fun name(): String;
+    fun name(): String
 }
 
 private object JavaSort : SortingFunctionTest {
