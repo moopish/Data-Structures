@@ -19,7 +19,9 @@ interface List<E> : Deque<E> {
     fun remove(index: Int): E
 
     override fun addFirst(item: E) = add(0, item)
+    override fun getFirst(): E = get(0)
     override fun removeFirst() = remove(0)
     override fun addLast(item: E) = add(size(), item)
+    override fun getLast(): E = get(size() - 1)
     override fun removeLast() = remove(size() - 1)
 }

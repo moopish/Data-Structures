@@ -35,23 +35,37 @@ class ArrayDeque<E> : kstructs.list.List<E> {
     override fun add(index: Int, item: E) {
         if (index in 0..size) {
             if (size + 1 > array.size) resize()
-            if (index < size / 2) {
+            if (index == 0) {
+                pos = if (pos == 0) array.size - 1 else --pos
 
-                pos = if (pos == 0) array.size - 1 else pos - 1
-                for (k in 0..(index - 1))
-                    array[(pos + k) and (array.size - 1)] = array[(pos + k + 1) and (array.size - 1)]
+            } else if (index == size){
+                pos = if (pos == array.size - 1) 0 else ++pos
+
+            } else if (index < size / 2) {
+                val adj_i = (pos + index) and (array.size - 1)
+                if (pos in 1..(adj_i - 1)) {
+                    System.arraycopy(array, pos, array, pos - 1, index)
+                }
+                // index between 1 and size/2
+                // 0 < pos < adj_i < size (pos == 0 case ?)
+                // 0 <= adj_i < pos < size
+
             } else {
-                if (pos + size in pos..(array.size - 1)) {
+                if (pos + size in pos..(array.size - 2)) {
                     val i = pos + index
                     System.arraycopy(array, i, array, i + 1, size - i)
-                } else {
+                } else /*if (pos + size == array.size - 1) {
+                    array[0] = array[array.size - 1]
+                    val i = pos + index
+                    System.arraycopy(array, i, array, i + 1, size - i - 1)
+                } else*/ {
                     for (k in size downTo (index + 1))
                         array[(pos + k) and (array.size - 1)] = array[(pos + k - 1) and (array.size - 1)]
                     //val i = (pos + index) and (array.size - 1)
                     //System.arraycopy(array, i, array, i + 1, size - i)
                 }
             }
-            array[(pos + index) and (array.size - 1)] = item
+            array[(pos + index) and (array.size - 1)] = item //TODO figure out if this is the issue
             ++size
         } else
             throw IndexOutOfBoundsException()

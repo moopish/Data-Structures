@@ -12,5 +12,6 @@ package kstructs
  */
 interface Queue<E> : Collection<E> {
     fun add(item: E)
+    fun get(): E
     fun remove(): E
 }

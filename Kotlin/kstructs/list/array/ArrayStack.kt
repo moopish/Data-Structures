@@ -12,7 +12,7 @@ package kstructs.list.array
  */
 class ArrayStack<E> : kstructs.list.List<E> {
 
-    private var array: Array<E?> = kotlin.arrayOfNulls<Any?>(0) as Array<E?>
+    private var array: Array<Any?> = kotlin.arrayOfNulls<Any?>(1)
     private var size: Int = 0
 
     override fun size(): Int = size
@@ -51,7 +51,7 @@ class ArrayStack<E> : kstructs.list.List<E> {
             throw IndexOutOfBoundsException()
 
     private fun resize() {
-        var new_arr = arrayOfNulls<Any?>(Math.max(size*2, 1)) as Array<E?>
+        val new_arr = arrayOfNulls<Any?>(Math.max(size*2, 1))
         System.arraycopy(array, 0, new_arr, 0, size)
         array = new_arr
     }

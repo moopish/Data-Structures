@@ -11,6 +11,7 @@ package kstructs
  * @author Michael van Dyk
  */
 interface Stack<E> : Collection<E> {
-    fun push(item: E)
+    fun peek(): E
     fun pop(): E
+    fun push(item: E)
 }

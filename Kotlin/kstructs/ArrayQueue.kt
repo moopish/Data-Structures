@@ -10,7 +10,9 @@ package kstructs
  * </p>
  * @author Michael van Dyk
  */
-public class ArrayQueue<E> : Queue<E> {
+class ArrayQueue<E> : Queue<E> {
+    @Suppress("UNCHECKED_CAST")
+    override fun get(): E = array[pos] as E
 
     private var array: Array<Any?> = arrayOfNulls<Any?>(16)
     private var size: Int = 0
@@ -25,7 +27,7 @@ public class ArrayQueue<E> : Queue<E> {
 
     override fun remove(): E =
         if (size != 0) {
-            val ret = array[pos] as E
+            val ret = get()
             pos = (pos + 1) and (array.size - 1)
             if (4 * --size - 1 < array.size) resize()
             ret
