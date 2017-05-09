@@ -1,6 +1,6 @@
 package kstructs
 
-import kstructs.list.List
+import kstructs.List
 
 /**
  * <p>
@@ -12,7 +12,7 @@ import kstructs.list.List
  * </p>
  * @author Michael van Dyk
  */
-class DoublyLinkedList<E> : List<E>{
+class DoublyLinkedList<E> : List<E> {
 
     private var size: Int = 0
     private var dummy: Node<E> = Node(null as E)

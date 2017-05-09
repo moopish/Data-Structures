@@ -1,7 +1,7 @@
 package kstructs
 
-import kstructs.list.List
-import kstructs.list.array.ArrayStack
+import kstructs.List
+import kstructs.ArrayStack
 
 /**
  * <p>
@@ -15,8 +15,8 @@ import kstructs.list.array.ArrayStack
  */
 
 fun main(args: Array<String>) {
-    tester(ArrayStack<Int>(), 100, 10000)
-    tester(StackWrapper<Int>(java.util.LinkedList<Int>()), 100, 10000)
+    //stack_tester(SinglyLinkedList<Int>(), 1000, 10000)
+    tester(DualArrayDeque<Int>(), 10, 100)
 }
 
 private class ListWrapper<E>(val list: java.util.ArrayList<E>): List<E>
@@ -45,6 +45,14 @@ private class StackWrapper<E>(val stack: java.util.Deque<E>): Stack<E>
     override fun pop(): E = stack.pop()
     override fun push(item: E) { stack.push(item) }
     override fun size(): Int = stack.size
+}
+
+private class DummyStackWrapper<E>(val stack: Stack<E>): Stack<E>
+{
+    override fun peek(): E = stack.peek()
+    override fun pop(): E = stack.pop()
+    override fun push(item: E) { stack.push(item) }
+    override fun size(): Int = stack.size()
 }
 
 private class QueueWrapper<E>(val queue: java.util.Queue<E>): Queue<E>
@@ -129,7 +137,7 @@ private fun list_tester(list: List<Int>, times: Int, size: Int) {
                 }
                 1 -> {
                     if (list[index] != compare[index]) {
-                        println("FAILED")
+                        println("FAILED get")
                         return
                     }
                 }
@@ -139,7 +147,7 @@ private fun list_tester(list: List<Int>, times: Int, size: Int) {
                 }
                 3 -> {
                     if (list.remove(index) != compare.removeAt(index)) {
-                        println("FAILED")
+                        println("FAILED remove")
                         return
                     }
                 }
@@ -147,7 +155,7 @@ private fun list_tester(list: List<Int>, times: Int, size: Int) {
         }
         while (!list.isEmpty()) {
             if (list.remove(0) != compare.removeAt(0)) {
-                println("FAILED")
+                println("FAILED last loop")
                 return
             }
         }
@@ -456,7 +464,7 @@ private fun queue_tester(queue: Queue<Int>, times: Int, size: Int) {
     }
     for (i in 0 until size) {
         if (queue.remove() != compare.remove()) {
-            println("FAILED")
+            println("FAILED index $i, first remove loop")
             return
         }
     }
@@ -471,14 +479,14 @@ private fun queue_tester(queue: Queue<Int>, times: Int, size: Int) {
                 compare.add(j)
             } else {
                 if (queue.remove() != compare.remove()) {
-                    println("FAILED")
+                    println("FAILED $i, $j in random remove loop")
                     return
                 }
             }
         }
         while (!queue.isEmpty()) {
             if (queue.remove() != compare.remove()) {
-                println("FAILED")
+                println("FAILED in final remove loop")
                 return
             }
         }

@@ -38,7 +38,7 @@ class ArrayQueue<E> : Queue<E> {
 
 
     private fun resize() {
-        val new_arr: Array<Any?> = arrayOfNulls<Any?>(Math.max(16, size * 2))
+        val new_arr: Array<Any?> = arrayOfNulls<Any?>(Math.max(16, size * 2)) // TODO 16 an issue?
         if (pos + size in pos..array.size) { // TODO < array.size
             System.arraycopy(array, pos, new_arr, 0, size)
         } else {

@@ -1,4 +1,6 @@
-package kstructs.list
+package kstructs
+
+import kstructs.List
 
 /**
  * <p>

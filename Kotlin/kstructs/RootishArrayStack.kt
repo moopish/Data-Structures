@@ -1,7 +1,7 @@
 package kstructs
 
-import kstructs.list.List
-import kstructs.list.array.ArrayStack
+import kstructs.List
+import kstructs.ArrayStack
 
 /**
  * <p>
@@ -15,7 +15,7 @@ import kstructs.list.array.ArrayStack
  */
 class RootishArrayStack<E>: List<E> {
 
-    private val blocks: List<Array<Any?>> = ArrayStack()
+    private val blocks: List<Array<Any?>> = SinglyLinkedList()
     private var size: Int = 0
 
     private fun i2b(i: Int): Int = Math.ceil((-3.0 + Math.sqrt(9.0 + i * 8.0)) / 2.0).toInt()

@@ -1,5 +1,6 @@
 package kstructs
 
+import kstructs.List
 import java.util.*
 
 /**
@@ -13,7 +14,7 @@ import java.util.*
  * @author Michael van Dyk
  */
 
-class SinglyLinkedList<E> : kstructs.list.List<E> {
+class SinglyLinkedList<E> : List<E> {
 
     private val dummy: Node<E?> = Node(null, null)
     private var head: Node<E?> = dummy
@@ -34,8 +35,8 @@ class SinglyLinkedList<E> : kstructs.list.List<E> {
     override fun add(index: Int, item: E) {
         when (index) {
             !in 0..size -> throw IndexOutOfBoundsException()
-            0 -> addFirst(item)
-            size -> addLast(item)
+            0 -> push(item)
+            size -> add(item)
             else -> {
                 val before_node = getNode(index - 1)
                 val new_node = Node(item, before_node.next)
@@ -51,31 +52,39 @@ class SinglyLinkedList<E> : kstructs.list.List<E> {
 
     override fun get(): E = head.data ?: throw NoSuchElementException()
 
-    override fun get(index: Int): E =
-        when (index) {
-            !in 0..size -> throw IndexOutOfBoundsException()
-            0 -> get()
-            size -> getLast()
-            else -> getNode(index).data ?: throw NoSuchElementException()
-        }
+    override fun get(index: Int): E = getNode(index).data ?: throw NoSuchElementException()
 
-    override fun getFirst(): E = get()
+    override fun getFirst(): E = head.data ?: throw NoSuchElementException()
 
     override fun getLast(): E = tail.data ?: throw NoSuchElementException()
 
-    private fun getNode(index: Int): Node<E?> {
-        var curr = head
-        for (h in 1 until index) ++curr
-        return (curr)
-    }
+    private fun getNode(index: Int): Node<E?> =
+            when (index) {
+                0 -> head
+                size - 1 -> tail
+                else -> {
+                    var curr = head
+                    for (h in 1 .. index) ++curr
+                    curr
+                }
+            }
 
-    override fun peek(): E = get()
+    override fun peek(): E = head.data ?: throw NoSuchElementException()
 
     override fun pop(): E {
         val x = get()
         head = head.next
         if (--size == 0) tail = dummy
         return (x)
+    }
+
+    fun print() {
+        var curr = head
+        for (i in 1..size) {
+            print(" ${curr.data}")
+            ++curr
+        }
+        println()
     }
 
     override fun push(item: E) {
@@ -89,9 +98,9 @@ class SinglyLinkedList<E> : kstructs.list.List<E> {
 
     override fun remove(index: Int): E =
         when (index) {
-            !in 0..size -> throw IndexOutOfBoundsException()
+            !in 0 until size -> throw IndexOutOfBoundsException()
             0 -> removeFirst()
-            size -> removeLast()
+            size - 1 -> removeLast()
             else -> {
                 val before_node = getNode(index - 1)
                 val ret = before_node.next.data
@@ -106,34 +115,22 @@ class SinglyLinkedList<E> : kstructs.list.List<E> {
     override fun removeLast(): E {
         val ret = getLast()
 
-        if (--size == 0) {
+        if (size == 1) {
             head = dummy
             tail = dummy
         } else {
-            val second_last = getNode(size)
+            val second_last = getNode(size - 2)
             second_last.next = dummy
             tail = second_last
         }
+        --size
         return (ret)
     }
 
     override fun set(index: Int, item: E): E {
-        val ret: E?
-        when (index) {
-            !in 0 until size -> throw IndexOutOfBoundsException()
-            0 -> {
-                ret = head.data
-                head.data = item
-            }
-            size - 1 -> {
-                ret = tail.data
-            }
-            else -> {
-                val node = getNode(index)
-                ret = node.data
-                node.data = item
-            }
-        }
+        val node = getNode(index)
+        val ret = node.data
+        node.data = item
         return (ret ?: throw NoSuchElementException())
     }
 

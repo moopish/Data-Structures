@@ -1,4 +1,4 @@
-package kstructs.list
+package kstructs
 
 import kstructs.Deque
 
@@ -17,6 +17,20 @@ interface List<E> : Deque<E> {
     operator fun set(index: Int, item: E): E
     fun add(index: Int, item: E)
     fun remove(index: Int): E
+
+    fun subListView(high: Int) = subListView(0, high)
+    fun subListView(low: Int, high: Int): ListView<E> = ListView(this, low, high)
+
+    override fun reverse() {
+        if (size() <= 1) return
+        for (i in 0..(size()/2))
+            set(size() - i - 1, set(i, get(size() - i - 1)))
+    }
+
+    fun addAll(other: List<E>) {
+        for (i in 0 until other.size())
+            add(other[i])
+    }
 
     override fun addFirst(item: E) = add(0, item)
     override fun getFirst() = get(0)

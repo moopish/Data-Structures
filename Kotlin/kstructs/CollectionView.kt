@@ -12,5 +12,5 @@ package kstructs
  */
 abstract class CollectionView<E>(val low: Int, val high: Int) {
     abstract operator fun get(index: Int): E?
-    abstract operator fun set(index: Int, item: E?)
+    abstract operator fun set(index: Int, item: E): E
 }

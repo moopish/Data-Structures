@@ -1,4 +1,6 @@
-package kstructs.list.array
+package kstructs
+
+import kstructs.List
 
 /**
  * <p>
@@ -10,9 +12,9 @@ package kstructs.list.array
  * </p>
  * @author Michael van Dyk
  */
-class ArrayStack<E> : kstructs.list.List<E> {
+class ArrayStack<E> : List<E> {
 
-    private var array: Array<Any?> = kotlin.arrayOfNulls<Any?>(1)
+    private var array: Array<Any?> = arrayOfNulls<Any?>(1)
     private var size: Int = 0
 
     override fun size(): Int = size

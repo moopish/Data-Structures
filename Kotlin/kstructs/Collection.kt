@@ -13,4 +13,8 @@ package kstructs
 interface Collection<E> {
     fun size(): Int
     fun isEmpty(): Boolean = size() == 0
+
+    fun reverse() {
+        TODO("Reverse not implemented")
+    }
 }

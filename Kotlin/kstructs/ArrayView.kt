@@ -1,5 +1,7 @@
 package kstructs
 
+import java.util.*
+
 /**
  * <p>
  * === ArrayView ===
@@ -30,11 +32,11 @@ open class ArrayView<E>(
             if (!inRange(index))
                 throw RuntimeException()
             else
-                arr[index]
+                arr[low + index]
 
-    override operator fun set(index: Int, item: E?) =
-            if (!inRange(index))
-                throw RuntimeException()
-            else
-                arr[index] = item
+    override operator fun set(index: Int, item: E): E {
+        val ret = get(index)
+        arr[low + index] = item
+        return (ret ?: throw NoSuchElementException())
+    }
 }
