@@ -1,4 +1,4 @@
 arraystack stack
 arrayqueue queue
-arraydeque deque
-arraylist list
+arraydeque deque default
+arraylist list default
