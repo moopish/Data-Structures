@@ -1,5 +1,6 @@
 *.class
 *.o
+*.a
 *.tester
 */Racket/*.bak
 */compiled/*
