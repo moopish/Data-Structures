@@ -4,6 +4,9 @@
  * @author Michael van Dyk
  */
 
+#ifndef _CSTRUCT_STRING_H_
+#define _CSTRUCT_STRING_H_ 1
+
 #include <stdbool.h>
 #include <stdint.h>
 
@@ -279,3 +282,5 @@ int last_pos(const string * const str, char c);
  * @return             the index of the last instance (-1 if not found)
  */
 int last_pos_before(const string * const str, char c, int before);
+
+#endif

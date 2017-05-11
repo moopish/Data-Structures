@@ -1,19 +1,19 @@
 test: main
 	valgrind ./cstring.tester
 
-testlib: buildlib main.o
-	gcc -o cstring.tester main.o libcstring.a
+testlib: buildlib cstring.tester.o
+	gcc -o cstring.tester cstring.tester.o libcstring.a
 	valgrind ./cstring.tester
 
 buildlib: cstring.o
 	ar ruv libcstring.a cstring.o
 	ranlib libcstring.a 
 
-main: main.o cstring.o
-	gcc -o cstring.tester main.o cstring.o
+main: cstring.tester.o cstring.o
+	gcc -o cstring.tester cstring.tester.o cstring.o
 
 main.o: main.c cstring.c cstring.h
-	gcc -o main.o -c main.c
+	gcc -o cstring.tester.o -c cstring.tester.c
 
 cstring.o: cstring.c cstring.h
 	gcc -o cstring.o -c cstring.c

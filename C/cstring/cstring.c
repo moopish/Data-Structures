@@ -151,7 +151,17 @@ void finalize_string(string * str)
  * @param  c     (in) the character to count
  * @return            the number of times c is in the given c-string
  */
-int character_instances(const char * const chars, char c);
+int character_instances(const char * const chars, char c)
+{
+    int count = 0;
+    int i     = 0;
+
+    while (chars[i] != 0)
+        if (chars[i++] == c)
+            ++count;
+
+    return (count);
+}
 
 /**
  *  Determines how many times the character c is found in the given string.
@@ -160,7 +170,10 @@ int character_instances(const char * const chars, char c);
  * @param  c   (in) the character to count
  * @return          the number of times c is in the given string
  */
-int character_instances_string(string * str, char c);
+int character_instances_string(string * str, char c)
+{
+    return (character_instances(str->characters, c));
+}
 
 /**
  * Determines the length of a null terminated string.
@@ -471,7 +484,7 @@ int last_pos_before(const string * const str, char c, int before)
 {
     int i = before - 1;
 
-    while (i < str->length) {
+    while (i >= 0) {
         if (str->characters[i] == c)
             return (i);
         --i;
@@ -479,15 +492,3 @@ int last_pos_before(const string * const str, char c, int before)
 
     return (-1);
 }
-
-
-
-
-
-
-
-
-
-
-
-
