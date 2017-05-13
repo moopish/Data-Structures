@@ -18,28 +18,30 @@
   (define (in-empty?) (empty? head))
 
   (define (node val nxt)
-    (cons val nxt))
+    (mcons val nxt))
 
   (define (add e)
     (if (empty? tail)
         (begin
           (set! tail (node e '()))
           (set! head tail))
-        (set! tail (node (car tail) (node e '())))))
+        (begin
+          (set-mcdr! tail (node e '()))
+          (set! tail (mcdr tail)))))
 
   ; Returns the first value in the stack.
   (define (get)
     (if (in-empty?)
         '()
-        (car head)))
+        (mcar head)))
 
-    ; Removes the first value in the stack and returns it.
+  ; Removes the first value in the stack and returns it.
   (define (remove)
     (if (in-empty?)
         '()
-        (get-set (car head)
+        (get-set (mcar head)
                  (set! head
-                       (cdr head)))))
+                       (mcdr head)))))
   
 
   ; Return the number of elements in the stack
@@ -47,7 +49,7 @@
     (define (size-it count curr)
       (if (empty? curr)
           count
-          (size-it (+ count 1) (cdr curr))))
+          (size-it (+ count 1) (mcdr curr))))
     (size-it 0 head))
 
   ; Allow for methods to be run on this structure
