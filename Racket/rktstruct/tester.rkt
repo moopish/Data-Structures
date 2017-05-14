@@ -5,6 +5,7 @@
 
 (require "queue.rkt")
 (require "stack.rkt")
+(require "deque.rkt")
 
 (define (queue-tester que)
   (begin
@@ -22,4 +23,4 @@
     (println (que 'remove))
     (println (que 'size))))
 
-(queue-tester (queue))
+(queue-tester (deque))
