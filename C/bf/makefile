@@ -1,7 +1,7 @@
-build:  addcopy.tester addmove.tester copy.tester hello.tester move.tester subcopy.tester submove.tester
+build:  addcopy.tester addmove.tester copy.tester hello.tester inputtest.tester mod2.tester move.tester subcopy.tester submove.tester
 
 clean:
-	rm -f  addcopy.tester addmove.tester copy.tester hello.tester move.tester subcopy.tester submove.tester *.c
+	rm -f  addcopy.tester addmove.tester copy.tester hello.tester inputtest.tester mod2.tester move.tester subcopy.tester submove.tester *.c
 
 remakefile:
 	./make.sh
@@ -21,6 +21,14 @@ copy.tester: copy.bf bf2c.sh
 hello.tester: hello.bf bf2c.sh
 	./bf2c.sh hello.bf
 	gcc -o hello.tester hello.c
+
+inputtest.tester: inputtest.bf bf2c.sh
+	./bf2c.sh inputtest.bf
+	gcc -o inputtest.tester inputtest.c
+
+mod2.tester: mod2.bf bf2c.sh
+	./bf2c.sh mod2.bf
+	gcc -o mod2.tester mod2.c
 
 move.tester: move.bf bf2c.sh
 	./bf2c.sh move.bf

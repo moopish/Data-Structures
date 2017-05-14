@@ -1,6 +1,10 @@
 #!/bin/bash
 
-BUFF_SIZE=1024
+if [ "$2" == "" ]; then
+  BUFF_SIZE=1024
+else
+  BUFF_SIZE=$2
+fi
 
 if [ -e "$1" ]; then
   filename=$(basename "$1")
@@ -37,7 +41,7 @@ if [ -e "$1" ]; then
         ;;
       
       ",")
-        echo "    /* get not implemented */" >> $filename.c
+        echo "    *ptr = getchar();" >> $filename.c
         ;;
 
       "[")
