@@ -1,8 +1,5 @@
 package kstructs
 
-import kstructs.List
-import kstructs.ArrayStack
-
 /**
  * <p>
  * === Testing ===
@@ -16,7 +13,7 @@ import kstructs.ArrayStack
 
 fun main(args: Array<String>) {
     //stack_tester(SinglyLinkedList<Int>(), 1000, 10000)
-    tester(DoublyLinkedList<Int>(), 1000, 100000)
+    tester(DualArrayDeque<Int>(), 1000, 100000)
 }
 
 private class ListWrapper<E>(val list: java.util.ArrayList<E>): List<E>

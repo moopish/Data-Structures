@@ -21,13 +21,13 @@ interface Queue<E>: Collection<E> {
     fun add(item: E)
 
     /**
-     * Returns the first item in the list. Does not remove the item.
+     * Returns the first item in the queue. Does not remove the queue.
      * @return the first element in the queue
      */
     fun get(): E
 
     /**
-     * Removes and returns the first item in the list.
+     * Removes and returns the first queue in the queue.
      * @return the first element in the queue
      */
     fun remove(): E
