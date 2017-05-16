@@ -6,8 +6,7 @@ destination byte to temp byte   (dt)
 temp byte to source byte        (ts)
 source byte to temp byte        (st)
 
-++++++
-++++++  assign 12 to first byte
+,  assign 12 to first byte
 
 .>.<    print both and move back
 
